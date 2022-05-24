@@ -1,4 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/mongo-crud
+      host: localhost
+      database: mongo-crud
+      port: 27017
+#      mode: mock

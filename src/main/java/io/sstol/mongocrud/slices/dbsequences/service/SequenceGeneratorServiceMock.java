@@ -1,9 +1,8 @@
 package io.sstol.mongocrud.slices.dbsequences.service;
 
 import io.sstol.mongocrud.slices.dbsequences.db.daos.DatabaseSequenceDao;
-import io.sstol.mongocrud.slices.users.db.UsersRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
@@ -21,14 +20,9 @@ import static org.springframework.data.mongodb.core.query.Query.query;
  */
 @Service
 @RequiredArgsConstructor
-@ConditionalOnMissingBean(ISequenceGeneratorService.class)
-public class SequenceGeneratorService implements ISequenceGeneratorService {
-    private final MongoOperations mongoOperations;
-
+@ConditionalOnProperty(prefix = "spring.data.mongodb", name = "mode", havingValue = "mock")
+public class SequenceGeneratorServiceMock implements ISequenceGeneratorService {
     public long generateSequence(String seqName) {
-        DatabaseSequenceDao counter = mongoOperations.findAndModify(query(where("_id").is(seqName)),
-                new Update().inc("seq",1), options().returnNew(true).upsert(true),
-                DatabaseSequenceDao.class);
-        return !Objects.isNull(counter) ? counter.getSeq() : 1;
+        return 1;
     }
 }

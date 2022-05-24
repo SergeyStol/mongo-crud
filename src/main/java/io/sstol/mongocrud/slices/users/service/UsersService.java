@@ -1,7 +1,7 @@
 package io.sstol.mongocrud.slices.users.service;
 
 import io.sstol.mongocrud.common.exceptions.api.NotFoundException;
-import io.sstol.mongocrud.slices.dbsequences.service.SequenceGeneratorService;
+import io.sstol.mongocrud.slices.dbsequences.service.ISequenceGeneratorService;
 import io.sstol.mongocrud.slices.users.api.v1.dtos.UserDto;
 import io.sstol.mongocrud.slices.users.db.UsersRepository;
 import io.sstol.mongocrud.slices.users.db.daos.UserDao;
@@ -24,7 +24,7 @@ import static io.sstol.mongocrud.slices.users.api.v1.ExceptionMessages.CANT_FIND
 @Slf4j
 public class UsersService {
     private final UsersRepository repo;
-    private final SequenceGeneratorService sequenceGeneratorService;
+    private final ISequenceGeneratorService sequenceGeneratorService;
     private final ModelMapper modelMapper;
 
     public UserDto getUser(long id) {
