@@ -5,3 +5,14 @@ spring:
       database: mongo-crud
       port: 27017
 #      mode: mock
+
+# actuator
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: "*"
+#  endpoint:
+#    beans:
+#      enabled: true
